@@ -1,5 +1,6 @@
-# Learning Create REST API Using NodeJS,Express, MySQL
+# About This
 
+<b>Learning to Create REST API Using NodeJS,Express and MySQL</b>
 
 ## Setup Project
 
@@ -7,8 +8,9 @@
 
 ## Built With
 
-- [NodeJS]
-- [Express]
-- [MySQL]
+- [NodeJS](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [Sequelize](https://sequelize.org/)
+- [MySQL](https://www.mysql.com/)
 
 
