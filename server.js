@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+//Models
+const db = require("./app/models");
+
 const app = express();
 
 let whitelist = [
@@ -24,12 +27,18 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+//Synce dayabase
+db.sequelize.sync();
+
 app.get("/", (req, res) => {
     res.json({
         message: "WelcOme to ExMySQL"
     });
 
 });
+
+//Posts Routes
+require("./app/routes/post.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 

@@ -7,12 +7,12 @@ exports.create = (req, res) => {
     //VALIDATE REQUEST
     if (!req.body.title) {
         res.status(400).send({
-            message: "Contetnt cant be empty!"
+            message: "Content cant be empty!"
         });
         return;
     }
 
-    //CRETE POST
+    //CREATE POST
     const post = {
         title: req.body.title,
         description: req.body.description,
@@ -20,7 +20,7 @@ exports.create = (req, res) => {
     }
 
     Post.create(post).then((data) => {
-        res.send(Data);
+        res.send(data);
     }).catch((err) => {
         res.status(500).send({
             message: err.message || "Some error occurred while create the Post "
@@ -30,14 +30,37 @@ exports.create = (req, res) => {
 
 // Retrieve all
 exports.findAll = (req, res) => {
+    const title = req.query.title;
+    let condition = title ? {
+        title: {
+            [Op.like]: `%${title}%`
+        }
+    } : null;
 
-}
+    Post.findAll({
+        where: condition
+    }).then((data) => {
+        res.send(data);
+    }).catch((err) => {
+        res.status(500).send({
+            message: err.message || "some error occured while find post"
+        });
+    });
+};
 
 // FIND A SINGLE
 exports.findOne = (req, res) => {
+    const id = req.params.id;
 
+    Post.findByPk(id).then((data)=>{
+        res.send(data);
+    }).catch((err)=>{
+        res.tataus(500).send({
+            message:"Error Retrieving post with id="+id
+        });
+    });
 
-}
+};
 
 // UPDATE POST WITH ID
 exports.update = (req, res) => {
